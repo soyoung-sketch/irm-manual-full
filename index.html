@@ -1581,6 +1581,8 @@ const IMGS = {
   "8bb2": "images/매대진열조회.png",
   "8bb3": "images/매대재고조정등록-1.png",
   "8bb4": "images/매대재고조정조회-1.png",
+  "8bb4b": "images/매대재고조정조회-5.png",
+  "8bb4c": "images/매대재고조정조회-3.png",
   "8bb5": "images/로케이션재고현황-1.png",
   "8cc1": "images/로케이션관리-1.png",
   "8cc2": "images/로케이션엑셀등록-1.png",
@@ -7191,13 +7193,15 @@ const DESCS = {
     {type:"step", num:"1", title:`📋 조정완료`, subs:[
       `작성중 내역을 선택하고 <span class='ui-btn'>✔ 조정완료</span> 버튼을 누릅니다.`,
       "⬇",
-      "<b>“조정완료 하시겠습니까?”</b> 확인창에서 <span class='ui-btn'>예</span>를 누르면 <b>완료일</b>이 기록되며 <b>조정완료</b> 탭으로 이동합니다.",
+      "<b>“조정완료 하시겠습니까?”</b> 확인창에서 <span class='ui-btn'>예</span>를 누르면 <b>완료일</b>이 기록되며 🔗 <b class='dlink' onclick=\"goPage(2)\">조정완료</b> 탭으로 이동합니다.",
     ]},
     {type:"step", num:"2", title:`🚫 취소`, subs:[
       `작성중 내역을 <span class='ui-btn'>취소</span> 처리합니다.`,
       "⬇",
-      "<b>“취소 하시겠습니까?”</b> 확인창에서 <span class='ui-btn'>예</span>를 누르면 해당 내역이 <b>취소</b> 탭으로 이동합니다.",
+      "<b>“취소 하시겠습니까?”</b> 확인창에서 <span class='ui-btn'>예</span>를 누르면 해당 내역이 🔗 <b class='dlink' onclick=\"goPage(1)\">취소</b> 탭으로 이동합니다.",
     ]},
+  ], "8bb4b": [
+  ], "8bb4c": [
   ], "8bb5": [
     {type:"note", text:"💡 <b>로케이션(Location)</b>은 상품이 실제 보관되거나 진열된 위치를 의미합니다."},
     {type:"note", text:"💡 예) 창고 A구역, 매장 1열, 냉장 진열대, 창고 선반 등 상품의 실제 위치를 로케이션으로 관리할 수 있습니다."},
@@ -10612,7 +10616,7 @@ const SECTIONS = [
     { id: "8b-2a",  title: "매대 진열 등록",        subtitles: { "8bb1": "" }, pages: ["8bb1"], tips: {} },
     { id: "8b-2b",  title: "매대 진열 조회",        subtitles: { "8bb2": "매대 진열 내역 조회" }, pages: ["8bb2"], tips: {} },
     { id: "8b-2c",  title: "매대 재고조정 등록",    subtitles: { "8bb3": "매대 상품 재고 조정 등록" }, pages: ["8bb3"], tips: {} },
-    { id: "8b-2d",  title: "매대 재고조정 조회",    subtitles: { "8bb4": "매대 재고조정 내역 조회·완료·취소" }, pages: ["8bb4"], tips: {} },
+    { id: "8b-2d",  title: "매대 재고조정 조회",    subtitles: { "8bb4": "매대 재고조정 내역 조회·완료·취소", "8bb4b": "", "8bb4c": "" }, pages: ["8bb4","8bb4b","8bb4c"], pageLabels: ["작성중","취소","조정완료"], tips: {} },
     { id: "8b-2e",  title: "로케이션 재고 현황",    subtitles: { "8bb5": "상품별 로케이션 재고·입출고 이력 조회" }, pages: ["8bb5"], tips: {} },
     { id: "d-ch8b-3", type: "divider", title: "로케이션 관리" },
     { id: "8b-3a",  title: "로케이션 관리",         subtitles: { "8cc1": "매장·창고 로케이션(위치) 등록·관리" }, pages: ["8cc1"], tips: {} },
@@ -11865,43 +11869,53 @@ const SIM = {
     start: "1",
     cat: {x:5.3, y:28.4, w:11, h:2.6},
     screens: {
-      // 메인 (작성중)
+      // 작성중 탭 (탭 이동은 page:N)
       "1":   {img:"images/매대재고조정조회-1.png", btns:[
-                {x:17, y:6.4, w:6.3, h:3.1, plain:true, to:"1", tip:"현재 <b>작성중</b> 탭입니다."},
-                {x:23.3, y:6.4, w:6.3, h:3.1, plain:true, to:"cancelled", tip:"<b>취소</b> 탭으로 이동합니다."},
-                {x:29.6, y:6.4, w:6.3, h:3.1, plain:true, to:"done", tip:"<b>조정완료</b> 탭으로 이동합니다."},
+                {x:17, y:6.4, w:6.3, h:3.1, plain:true, page:0, tip:"현재 <b>작성중</b> 탭입니다."},
+                {x:23.3, y:6.4, w:6.3, h:3.1, plain:true, page:1, tip:"<b>취소</b> 탭으로 이동합니다."},
+                {x:29.6, y:6.4, w:6.3, h:3.1, plain:true, page:2, tip:"<b>조정완료</b> 탭으로 이동합니다."},
                 {x:94.2, y:6.5, w:5.2, h:3, plain:true, option:true, optionWin:{x:47, y:23.5, w:52}, tip:"<b>옵션</b> 버튼으로 문서저장·레이아웃 메뉴를 표시합니다."},
                 {x:86.4, y:9.9, w:6.9, h:2.9, num:"1", numCorner:true, to:"confirm-done", toggle:true, tip:"선택한 내역의 재고 조정을 완료 <b>처리</b>합니다."},
                 {x:93.3, y:9.9, w:6.1, h:2.9, num:"2", numCorner:true, to:"confirm-cancel", toggle:true, tip:"선택한 조정 내역을 <b>취소</b>합니다."},
               ]},
-      // 조정완료 확인창
+      // 조정완료 확인창 — 예: 창 닫기 (조정완료 탭 이동은 카드 ①의 🔗 링크)
       "confirm-done":{img:"images/매대재고조정조회-2.png", win:{x:39.2, y:24.7, w:37.7},
                 btns:[
-                  {x:67.8, y:75.8, w:14.2, h:16.6, to:"done", tip:"<b>조정완료</b>를 진행합니다."},
+                  {x:67.8, y:75.8, w:14.2, h:16.6, close:true, tip:"<b>조정완료</b>를 진행합니다."},
                   {x:83.0, y:75.8, w:14.2, h:16.6, close:true, plain:true, tip:"<b>아니오</b>를 누르면 창이 닫힙니다."},
                   {x:94.5, y:0, w:5.1, h:14.9, plain:true, close:true, tip:"<b>✕</b>를 클릭하면 창이 닫힙니다."},
                 ]},
-      // 조정완료 결과
-      "done":{img:"images/매대재고조정조회-3.png", btns:[
-                {x:17, y:6.4, w:6.3, h:3.1, plain:true, to:"1", tip:"<b>작성중</b> 탭으로 이동합니다."},
-                {x:23.3, y:6.4, w:6.3, h:3.1, plain:true, to:"cancelled", tip:"<b>취소</b> 탭으로 이동합니다."},
-                {x:29.6, y:6.4, w:6.3, h:3.1, plain:true, to:"done", tip:"현재 <b>조정완료</b> 탭입니다."},
-                {x:29.6, y:6.4, w:6.3, h:3.1, trace:true},
-                {x:94.2, y:6.5, w:5.2, h:3, plain:true, option:true, optionWin:{x:47, y:23.5, w:52}, tip:"<b>옵션</b> 버튼으로 문서저장·레이아웃 메뉴를 표시합니다."},
-              ]},
-      // 취소 확인창
+      // 취소 확인창 — 예: 창 닫기 (취소 탭 이동은 카드 ②의 🔗 링크)
       "confirm-cancel":{img:"images/매대재고조정조회-4.png", win:{x:39.2, y:24.7, w:37.7},
                 btns:[
-                  {x:67.8, y:75.8, w:14.2, h:16.6, to:"cancelled", tip:"<b>취소</b>를 진행합니다."},
+                  {x:67.8, y:75.8, w:14.2, h:16.6, close:true, tip:"<b>취소</b>를 진행합니다."},
                   {x:83.0, y:75.8, w:14.2, h:16.6, close:true, plain:true, tip:"<b>아니오</b>를 누르면 창이 닫힙니다."},
                   {x:94.5, y:0, w:5.1, h:14.9, plain:true, close:true, tip:"<b>✕</b>를 클릭하면 창이 닫힙니다."},
                 ]},
-      // 취소 결과
-      "cancelled":{img:"images/매대재고조정조회-5.png", btns:[
-                {x:17, y:6.4, w:6.3, h:3.1, plain:true, to:"1", tip:"<b>작성중</b> 탭으로 이동합니다."},
-                {x:23.3, y:6.4, w:6.3, h:3.1, plain:true, to:"cancelled", tip:"현재 <b>취소</b> 탭입니다."},
-                {x:29.6, y:6.4, w:6.3, h:3.1, plain:true, to:"done", tip:"<b>조정완료</b> 탭으로 이동합니다."},
-                {x:23.3, y:6.4, w:6.3, h:3.1, trace:true},
+    },
+  },
+  "8bb4b": {
+    start: "1",
+    cat: {x:5.3, y:28.4, w:11, h:2.6},
+    screens: {
+      // 취소 탭
+      "1":   {img:"images/매대재고조정조회-5.png", btns:[
+                {x:17, y:6.4, w:6.3, h:3.1, plain:true, page:0, tip:"<b>작성중</b> 탭으로 이동합니다."},
+                {x:23.3, y:6.4, w:6.3, h:3.1, plain:true, page:1, tip:"현재 <b>취소</b> 탭입니다."},
+                {x:29.6, y:6.4, w:6.3, h:3.1, plain:true, page:2, tip:"<b>조정완료</b> 탭으로 이동합니다."},
+                {x:94.2, y:6.5, w:5.2, h:3, plain:true, option:true, optionWin:{x:47, y:23.5, w:52}, tip:"<b>옵션</b> 버튼으로 문서저장·레이아웃 메뉴를 표시합니다."},
+              ]},
+    },
+  },
+  "8bb4c": {
+    start: "1",
+    cat: {x:5.3, y:28.4, w:11, h:2.6},
+    screens: {
+      // 조정완료 탭
+      "1":   {img:"images/매대재고조정조회-3.png", btns:[
+                {x:17, y:6.4, w:6.3, h:3.1, plain:true, page:0, tip:"<b>작성중</b> 탭으로 이동합니다."},
+                {x:23.3, y:6.4, w:6.3, h:3.1, plain:true, page:1, tip:"<b>취소</b> 탭으로 이동합니다."},
+                {x:29.6, y:6.4, w:6.3, h:3.1, plain:true, page:2, tip:"현재 <b>조정완료</b> 탭입니다."},
                 {x:94.2, y:6.5, w:5.2, h:3, plain:true, option:true, optionWin:{x:47, y:23.5, w:52}, tip:"<b>옵션</b> 버튼으로 문서저장·레이아웃 메뉴를 표시합니다."},
               ]},
     },
