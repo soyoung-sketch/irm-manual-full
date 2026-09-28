@@ -8391,11 +8391,16 @@ const DESCS = {
       "⬇",
       "<span class='ui-btn'>🔍 검색</span> 버튼을 누르면 조건에 맞는 <b>상품 재고 현황</b>이 조회됩니다.",
     ]},
+    {type:"step", num:"3", title:`✔️ 매입처 선택`, subs:[
+      "검색된 <b>매입처</b>가 표시됩니다.",
+      "매입처(행)를 <b>더블클릭</b>하면 해당 매입처의 <b>상품 정보만</b> 볼 수 있습니다.",
+      "%%하단 <b>[매입처코드] 필터</b>의 ✕를 누르면 해제됩니다.",
+    ]},
+    {type:"step", num:"4", title:`📊 재고 현황 확인`, subs:[
+      "상품별 <b>기초재고 · 입고정보(+) · 출고정보(-) · 현재고</b>를 확인합니다.",
+    ]},
     {type:"step", num:"★", ystar:true, title:`🔗 재고조정 등록`, body:"<span class='ui-btn'>재고조정</span> 버튼을 누르면 <b>재고조정 등록</b> 화면으로 이동합니다.", subs:[
       "🔗 <b class='dlink' onclick=\"openSub('ch9','9-3a',true)\">재고조정 등록</b> 페이지 바로가기",
-    ]},
-    {type:"step", num:"★", ystar:true, title:`🔍 사업장별 상품 보기`, subs:[
-      "조회 결과에서 <b>사업장(행)</b>을 더블클릭하면 해당 사업장의 <b>상품 정보만</b> 볼 수 있습니다.",
     ]},
   ], "9ia2": [
     {type:"note", text:"<b>상품 수불 내역</b>은 상품별 <b>입·출고(수불) 내역</b>을 기간별로 조회하는 화면입니다."},
@@ -12114,14 +12119,14 @@ const SIM = {
                 {x:94.4, y:10.4, w:5.0, h:3.1, num:"2", numCorner:true, to:"found", tip:"<b>검색</b> 버튼을 누르면 상품 재고 현황이 조회됩니다."},
                 {x:65.7, y:6.6, w:6.1, h:2.9, yellow:true, scroll:"★1", tip:"<b>재고조정</b> 버튼을 누르면 재고조정 등록 화면으로 이동합니다."},
                 {x:94.0, y:6.6, w:5.4, h:2.9, plain:true, option:true, optionWin:{x:47, y:10, w:52}, tip:"<b>옵션</b>에서 문서저장 등 부가 기능을 사용합니다."},
-                {x:27.9, y:40.1, w:16.3, h:13.0, lite:true},
-                {x:45.2, y:47.8, w:54.8, h:45.6, lite:true},
-                {x:27.8, y:46.8, w:16.5, h:2.0, yellow:true, scroll:"★2", dbl:"filtered", tip:"<b>더블클릭</b>하면 해당 사업장의 상품 정보만 볼 수 있습니다."},
+                {x:27.9, y:37.7, w:16.1, h:57.0, num:"3", numCorner:true, notint:true, tip:"검색된 <b>매입처</b>가 표시됩니다."},
+                {x:44.9, y:37.7, w:55.0, h:57.0, num:"4", numCorner:true, notint:true, tip:"상품별 <b>재고 현황</b>을 확인합니다."},
+                {x:27.8, y:46.8, w:16.5, h:2.0, front:true, scroll:"3", dbl:"filtered", tip:"매입처를 <b>더블클릭</b>하면 해당 매입처 상품만 볼 수 있습니다."},
               ]},
       // 행 더블클릭 → 해당 조건의 상품만
       "filtered": {img:"images/상품재고현황-2.png", btns:[
-                {x:44.6, y:47.8, w:55.4, h:7.2, lite:true},
-                {x:44.6, y:47.8, w:55.4, h:7.2, yellow:true, scroll:"★2", tip:"더블클릭한 조건의 <b>상품</b>만 표시됩니다."},
+                {x:44.6, y:47.8, w:55.4, h:7.2, notint:true, scroll:"3", tip:"더블클릭한 매입처의 <b>상품</b>만 표시됩니다."},
+                {x:45.4, y:91.9, w:11.4, h:2.2, to:"found", scroll:"3", tip:"<b>✕</b>를 누르면 매입처 필터가 해제됩니다."},
                 {x:94.0, y:6.6, w:5.4, h:2.9, plain:true, option:true, optionWin:{x:47, y:10, w:52}, tip:"<b>옵션</b>에서 문서저장 등 부가 기능을 사용합니다."},
               ]},
     },
