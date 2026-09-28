@@ -1595,6 +1595,7 @@ const IMGS = {
   "9ia3": "images/이력코드관리-1.png",
   "9ia4": "images/점간이동재고회전일-1.png",
   "9sa1": "images/재고실사계획1.png",
+  "9sa1b": "images/재고실사계획2.png",
   "9sa2": "images/재고실사조회-진행중-1.png",
   "9sa2b": "images/재고실사조회-취소-1.png",
   "9sa2c": "images/재고실사조회-실사완료-1.png",
@@ -8529,17 +8530,19 @@ const DESCS = {
       "<span class='ui-btn'>✔ 진행중 정보 상태체크(F2)</span> 버튼을 눌러 각 문서(매입·소분·판매·이동·자가사용·불량처리)가 <b>정상적으로 마감</b>되었는지 체크합니다.",
     ]},
     {type:"note", text:"💡 <b>왜 문서정보를 확인하나요?</b> 재고실사는 기준 시점의 재고를 확인하는 작업이므로, 매입·판매·이동 등 <b>진행 중인 문서</b>가 남아 있으면 실제 재고와 전산 재고가 달라질 수 있습니다. 실사 전 관련 업무가 모두 완료되었는지 확인한 후 진행하는 것을 권장합니다."},
-    {type:"step", num:"2", title:`✔️ 선택상품 실사`, subs:[
-      "재고실사를 계획할 <b>상품을 선택</b>하는 탭으로 이동하게 됩니다.",
+    {type:"step", num:"★", title:`✔️ 선택상품 실사`, subs:[
+      "재고실사를 계획할 <b>상품을 선택</b>하는 탭으로 이동하게 됩니다. (🔗 <b class='dlink' onclick=\"goPage(1)\">선택상품 실사</b> 탭 바로가기)",
     ]},
-    {type:"step", num:"3", title:`➕ 상품추가`, subs:[
+  ],
+  "9sa1b": [
+    {type:"step", num:"1", title:`➕ 상품추가`, subs:[
       "<span class='ui-btn'>＋ 상품추가(F2)</span> 버튼을 누르면 <b>상품 통합검색</b> 창이 열립니다.",
       "⬇",
       "검색할 상품의 <b>조건을 작성</b>한 후 <span class='ui-btn'>🔍 검색</span> 버튼을 눌러주세요.",
       "⬇",
       "원하는 상품을 선택하고 <span class='ui-btn'>✔ 선택</span> 하면 실사 목록에 추가됩니다.",
     ]},
-    {type:"step", num:"4", title:`📝 신규등록`, subs:[
+    {type:"step", num:"2", title:`📝 신규등록`, subs:[
       "실사등록할 문서의 <b>제목·조정일·작성일</b>을 설정해주세요.",
       "⬇",
       "목록의 <b>실사 대상 상품</b>을 확인해주세요.",
@@ -10635,7 +10638,7 @@ const SECTIONS = [
     { id: "9-1c",   title: "이력 코드 관리",        subtitles: { "9ia3": "상품 이력(Lot) 코드 등록·조회·삭제" }, pages: ["9ia3"], tips: {} },
     { id: "9-1d",   title: "점간이동 재고회전일",   subtitles: { "9ia4": "재고 회전(소진) 속도 분석·조회" }, pages: ["9ia4"], tips: {} },
     { id: "d-ch9-2", type: "divider", title: "재고 실사 관리" },
-    { id: "9-2a",   title: "재고실사 계획",         subtitles: { "9sa1": "재고 실사 문서 등록 (전체·선택상품 실사)" }, pages: ["9sa1"], tips: {} },
+    { id: "9-2a",   title: "재고실사 계획",         subtitles: { "9sa1": "재고 실사 문서 등록 (전체·선택상품 실사)", "9sa1b": "" }, pages: ["9sa1","9sa1b"], pageLabels: ["전체상품 실사","선택상품 실사"], tips: {} },
     { id: "9-2b",   title: "재고실사 조회",         subtitles: { "9sa2": "진행중", "9sa2b": "취소", "9sa2c": "실사완료" }, pages: ["9sa2","9sa2b","9sa2c"], pageLabels: ["진행중","취소","실사완료"], tips: {} },
     { id: "9-2c",   title: "재고실사 현황",         subtitles: { "9sa3": "" }, pages: ["9sa3"], tips: {} },
     { id: "d-ch9-3", type: "divider", title: "재고조정관리" },
@@ -12212,28 +12215,35 @@ const SIM = {
       // 전체상품 실사 탭
       "1": {img:"images/재고실사계획1.png", btns:[
                 {x:17.4, y:21.2, w:81.7, h:75.0, scroll:"1", tip:"업무별 <b>문서 마감 상태</b>가 표시됩니다."},
-                {x:17.3, y:18.2, w:6.0, h:3.0, plain:true, to:"1", tip:"현재 <b>전체상품 실사</b> 탭입니다."},
-                {x:23.6, y:18.2, w:6.6, h:3.0, num:"2", numCorner:true, to:"2", tip:"<b>선택상품 실사</b> 탭으로 이동해 실사할 상품을 추가합니다."},
+                {x:17.3, y:18.2, w:6.0, h:3.0, plain:true, page:0, tip:"현재 <b>전체상품 실사</b> 탭입니다."},
+                {x:23.6, y:18.2, w:6.6, h:3.0, plain:true, page:1, tip:"<b>선택상품 실사</b> 탭으로 이동합니다."},
                 {x:85.0, y:22.1, w:13.6, h:2.8, num:"1", numCorner:true, front:true, tip:"진행중 정보 <b>상태체크(F2)</b>로 문서 마감 상태를 확인합니다."},
               ]},
+    },
+  },
+  "9sa1b": {
+    start: "1",
+    cat: {x:5.4, y:24.5, w:11.0, h:2.5},
+    screens: {
       // 선택상품 실사 탭 (빈 목록)
-      "2": {img:"images/재고실사계획2.png", btns:[
-                {x:17.3, y:18.2, w:6.0, h:3.0, plain:true, to:"1", tip:"<b>전체상품 실사</b> 탭으로 이동합니다."},
-                {x:23.6, y:18.2, w:6.6, h:3.0, plain:true, to:"2", tip:"현재 <b>선택상품 실사</b> 탭입니다."},
-                {x:74.0, y:22.0, w:8.3, h:2.8, num:"3", numCorner:true, search:true, searchWin:{x:19.5, y:28.7, w:76.9}, searchDone:"5", tip:"<b>상품추가(F2)</b>로 상품 통합검색창을 열어 실사할 상품을 추가합니다."},
+      "1": {img:"images/재고실사계획2.png", btns:[
+                {x:17.3, y:18.2, w:6.0, h:3.0, plain:true, page:0, tip:"<b>전체상품 실사</b> 탭으로 이동합니다."},
+                {x:23.6, y:18.2, w:6.6, h:3.0, plain:true, page:1, tip:"현재 <b>선택상품 실사</b> 탭입니다."},
+                {x:74.1, y:22.2, w:8.0, h:2.5, num:"1", numCorner:true, search:true, searchWin:{x:19.5, y:28.7, w:76.9}, searchDone:"2", tip:"<b>상품추가(F2)</b>로 상품 통합검색창을 열어 실사할 상품을 추가합니다."},
               ]},
       // 상품 추가됨 (공용 상품 통합검색에서 선택 후)
-      "5": {img:"images/재고실사계획5.png", btns:[
-                {x:17.3, y:18.2, w:6.0, h:3.0, plain:true, to:"1", tip:"<b>전체상품 실사</b> 탭으로 이동합니다."},
-                {x:23.6, y:18.2, w:6.6, h:3.0, plain:true, to:"5", tip:"현재 <b>선택상품 실사</b> 탭입니다."},
-                {x:84.6, y:6.4, w:7.4, h:3.0, num:"4", numCorner:true, tip:"<b>신규등록</b> 버튼을 눌러 재고실사 문서를 저장합니다."},
-                {x:17.3, y:9.1, w:56.1, h:8.7, scroll:"4", tip:"<b>제목·조정일·작성일</b>을 설정합니다."},
+      "2": {img:"images/재고실사계획5.png", btns:[
+                {x:17.3, y:18.2, w:6.0, h:3.0, plain:true, page:0, tip:"<b>전체상품 실사</b> 탭으로 이동합니다."},
+                {x:23.6, y:18.2, w:6.6, h:3.0, plain:true, page:1, tip:"현재 <b>선택상품 실사</b> 탭입니다."},
+                {x:84.6, y:6.4, w:7.4, h:3.0, num:"2", numCorner:true, tip:"<b>신규등록</b> 버튼을 눌러 재고실사 문서를 저장합니다."},
+                {x:17.3, y:9.1, w:56.1, h:8.7, scroll:"2", tip:"<b>제목·조정일·작성일</b>을 설정합니다."},
                 {x:18.0, y:27.3, w:1.7, h:1.9, chk:"c1", chkRO:true},
                 {x:18.0, y:29.3, w:1.7, h:1.9, chk:"c2", chkRO:true},
                 {x:18.0, y:31.1, w:1.8, h:2.3, chk:"c3", chkRO:true},
-                {x:18.0, y:27.3, w:50.8, h:6.2, chkRow:"c1,c2,c3", scroll:"4", tip:"실사 대상 상품을 클릭하면 <b>체크</b>됩니다."},
-                {x:82.2, y:22.2, w:8.0, h:2.5, plain:true, to:"2", scroll:"4", tip:"<b>선택삭제(F4)</b>로 체크한 상품을 목록에서 뺍니다."},
-                {x:90.5, y:22.2, w:8.1, h:2.5, plain:true, to:"2", scroll:"4", tip:"<b>다시작성(F12)</b>으로 실사 목록을 비웁니다."},
+                {x:18.0, y:27.3, w:50.8, h:6.2, chkRow:"c1,c2,c3", scroll:"2", tip:"실사 대상 상품을 클릭하면 <b>체크</b>됩니다."},
+                {x:74.1, y:22.2, w:8.0, h:2.5, num:"1", numCorner:true, search:true, searchWin:{x:19.5, y:28.7, w:76.9}, searchDone:"2", tip:"<b>상품추가(F2)</b>로 상품 통합검색창을 열어 실사할 상품을 추가합니다."},
+                {x:82.2, y:22.2, w:8.0, h:2.5, plain:true, to:"1", scroll:"2", tip:"<b>선택삭제(F4)</b>로 체크한 상품을 목록에서 뺍니다."},
+                {x:90.5, y:22.2, w:8.1, h:2.5, plain:true, to:"1", scroll:"2", tip:"<b>다시작성(F12)</b>으로 실사 목록을 비웁니다."},
               ]},
     },
   },
